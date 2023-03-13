@@ -1,11 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-plusplus */
 
-const library = [
-  { title: "Catcher in the Rye", author: "JD Salinger", isbn: "9780140237498" },
-  { title: "Snow Crash", author: "Neal Stephenson", isbn: "9780241629833" },
-  { title: "All of You Will Die", author: "Pinkerton", isbn: "69" },
-];
+const library = [];
 
 function Book(title, author, isbn) {
   this.title = title;
@@ -29,11 +25,39 @@ function displayBooks(library) {
         <tr>
         <td>${book.title}</td>
         <td>${book.author}</td>
-        <td>${book.isbn}</td>
+        <td>${book.isbn}</td>  
+        <td><a href='#'><i class="fa-regular fa-trash-can"></i></a></td>
         </tr>
     `;
   }
   list.innerHTML = books;
 }
 
+// invoke function
 displayBooks(library);
+
+// clear fields
+function clearFields() {
+  document.querySelector("#title").value = "";
+  document.querySelector("#author").value = "";
+  document.querySelector("#isbn").value = "";
+}
+
+// add a new book
+document.querySelector("#book-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  // cache form values
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const isbn = document.querySelector("#isbn").value;
+
+  // validate
+  if (title === "" || author === "" || isbn === "") {
+    alert("Please complete all fields");
+  } else {
+    addBookToLibrary(title, author, isbn);
+  }
+  displayBooks(library);
+  clearFields();
+});
