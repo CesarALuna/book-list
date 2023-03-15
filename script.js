@@ -26,7 +26,7 @@ function displayBooks(library) {
         <td>${book.title}</td>
         <td>${book.author}</td>
         <td>${book.isbn}</td>  
-        <td><a href='#'><i class="fa-regular fa-trash-can"></i></a></td>
+        <td><a href='#'><i class="fa-regular fa-trash-can" onclick="removeBook(${i})" ></i></a></td>
         </tr>
     `;
   }
@@ -61,3 +61,8 @@ document.querySelector("#book-form").addEventListener("submit", (e) => {
   displayBooks(library);
   clearFields();
 });
+
+function removeBook(index) {
+  library.splice(index, 1);
+  displayBooks(library);
+}
